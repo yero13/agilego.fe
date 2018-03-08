@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Allocation } from '@app/model/scrum';
 import { RestClient } from '@service/rest.client';
 import { sprintf, vsprintf } from 'sprintf-js';
+import { ValidationResult } from '@app/model/validation';
 
 const SERVICE_ALLOCATIONS = '/assignments';
 const SERVICE_ALLOCATION = '/assignment';
@@ -16,6 +17,10 @@ export class AllocService extends RestClient {
 
   getAssignment(key: string, date: Date, group: string, employee: string): Observable<Allocation> {
     return this.http.get<Allocation>(this.getUrl(sprintf(SERVICE_ALLOCATION_GET, key, date, group, employee)));
+  }
+
+  validateAllocation(allocation: Allocation): Observable<ValidationResult[]> {
+    return this.http.post<ValidationResult[]>(this.getUrl(SERVICE_ALLOCATION_VALIDATE), allocation);
   }
 /*
   upsertAssignment(assignment: Allocation): Promise<number> {
@@ -33,11 +38,5 @@ export class AllocService extends RestClient {
       .catch(error => console.error(error));
   }
 
-  validateAssignment(assignment: Allocation): Promise<ValidationResult[]> {
-    return this.http.post(this.getUrl(SERVICE_ALLOCATION_VALIDATE), assignment, this.options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(error => console.error(error));
-  }
 */
 }

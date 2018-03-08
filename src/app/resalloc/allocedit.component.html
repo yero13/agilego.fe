@@ -1,5 +1,37 @@
 <h4 mat-dialog-title>Edit resource allocation</h4>
-<form [formGroup]="allocForm" #f="ngForm">
+
+<div class="main-text">
+  Issue: {{allocation.key}}<br/>
+  <span *ngIf="allocation.parent">Subtask of {{assignment.parent}}<br/></span>
+  Assigned to<br/>
+  Group: {{allocation.group}}&nbsp;&nbsp;Employee: {{employee.displayName}}<br/>
+</div>
+
+
+
+<div *ngIf="validations">
+  <h5>Warnings</h5>
+  <div *ngFor="let validation of validations" class="warning">{{validation.severity}}: {{validation.message}}</div>
+</div>
+<br>
+<form [formGroup]="allocForm" #f="ngForm" (ngSubmit)="onUpdate(f)">
+<!--
+
+  Issue: {{assignment.key}}<br/><br/>
+  <span *ngIf="assignment.parent">Subtask of {{assignment.parent}}<br/><br/></span>
+
+  <br/>
+  Assigned to<br/>
+  Group: {{assignment.group}}&nbsp;&nbsp;Employee: {{employee.displayName}}<br/><br/>
+
+  <div *ngIf="validations">
+    <div>Warnings</div>
+    <div *ngFor="let validation of validations">{{validation.severity}}: {{validation.message}}</div>
+  </div>
+
+
+-->
+
   <mat-dialog-content>
     <div>
       <mat-form-field hintLabel="Hours allocated">
@@ -14,14 +46,12 @@
       </mat-form-field>
     </div>
 
-    <!--
-    {{data['allocation'].key}}
-    {{data['employee'].displayName}}
-    -->
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close>No</button>
-    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-    <button mat-button>Yes</button>
+    <div class="button-row">
+      <button mat-raised-button type="submit" [disabled]="allocForm.invalid">Update</button>
+      <button mat-raised-button type="button" (click)="onDelete()" *ngIf="!is_new_allocation">Delete</button>
+      <button mat-raised-button type="button" mat-dialog-close="">Cancel</button>
+    </div>
   </mat-dialog-actions>
 </form>

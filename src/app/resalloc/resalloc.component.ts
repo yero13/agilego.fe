@@ -48,7 +48,7 @@ export class ResAllocComponent implements OnDestroy {
 
     dragService.drop.asObservable().takeUntil(this.destroy$).subscribe((value) => {
       // subscribe((value) => {
-      console.log(`drop: ${value[0]}` + JSON.stringify(value));
+      // console.log(`drop: ${value[0]}` + JSON.stringify(value));
       this.onDrop(value.slice(1));
     });
 
@@ -124,8 +124,7 @@ export class ResAllocComponent implements OnDestroy {
   }
 
   showAllocation(alloc: Allocation, employee: Employee): void {
-     console.dir(alloc);
-     this.dialog.open(AllocEditComponent, {height: '400px', width: '275px', data: { 'allocation': alloc, 'employee': employee }});
+     this.dialog.open(AllocEditComponent, {height: '550px', width: '450px', data: { 'allocation': alloc, 'employee': employee }});
     // console.dir(employee);
     // console.log('aaaaaaaaaaaaaaaaa');
     // this.modalDataService.setData({MSG_PARAM_ASSIGNMENT: assignment, MSG_PARAM_EMPLOYEE: employee});

@@ -6,6 +6,11 @@
   font-size:11px;
   font-weight:500;
 }
+.warning {
+  font-size:11px;
+  font-weight:500;
+  color: #A52A2A;
+}
 .text-center {
   text-align:center;
 }
@@ -28,5 +33,9 @@
   border:1px dotted grey;
   background-color:#D3D3D3;
 }
-
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 

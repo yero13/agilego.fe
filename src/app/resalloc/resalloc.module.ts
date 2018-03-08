@@ -4,6 +4,7 @@ import {
   MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule,
   ErrorStateMatcher, ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [ ResAllocComponent ],
   imports: [
     MatTableModule, CommonModule, FlexLayoutModule, DragulaModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule
+    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule
   ],
   providers: [ SprintService, AllocService, BacklogService, MessageService,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher} ],
