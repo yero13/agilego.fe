@@ -1,0 +1,36 @@
+<div fxFlex="50%" fxLayout="column">
+  <mat-table [dataSource]="backlog" [dragula]='"bag-work"' [attr.id]='"backlog"'>
+    <ng-container matColumnDef="key">
+      <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+      <mat-cell *matCellDef="let item" class="main-text">{{item.key}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let item" class="main-text">{{item.type}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
+      <mat-cell *matCellDef="let item" class="main-text">{{item.priority}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['key', 'type', 'priority']"></mat-header-row>
+    <mat-row *matRowDef="let item; columns: ['key', 'type', 'priority']" [ngClass]="{'selected-item': selectedItem == item}" class="selectable" (click)="selectBacklogItem(item.key)" [attr.key]="item.key"></mat-row>
+  </mat-table>
+</div>
+
+<div fxFlex="50%" fxLayout="column">
+  <div *ngIf="selectedItem" class="main-text">
+    <div>key: {{selectedItem.key}}</div>
+    <div>type: {{selectedItem.type}}</div>
+    <div>priority: {{selectedItem.priority}}</div>
+    <div>status: {{selectedItem.status}}</div>
+    <div>assignee: {{selectedItem.assignee_id}}</div>
+    <div>duedate: {{selectedItem.duedate}}</div>
+    <div>estimate: {{selectedItem.estimate}} (hours)</div>
+    <div>components: {{selectedItem.components}}</div>
+    <div>blocked by: {{selectedItem.blocked_by}}</div>
+    <div>blocks: {{selectedItem.blocks}}</div>
+  </div>
+</div>

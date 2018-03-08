@@ -1,0 +1,27 @@
+<h4 mat-dialog-title>Edit resource allocation</h4>
+<form [formGroup]="allocForm" #f="ngForm">
+  <mat-dialog-content>
+    <div>
+      <mat-form-field hintLabel="Hours allocated">
+        <input matInput type="text" id="whrs" [formControl]="whrs" maxlength="4" placeholder="Estimate" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="whrs.hasError('pattern') && !whrs.hasError('required')">Please enter valid number</mat-error>
+        <mat-error *ngIf="whrs.hasError('required')">Value is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <textarea matInput id="comment" [formControl]="comment" maxlength="150" placeholder="Comment" rows="5" cols="130"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!--
+    {{data['allocation'].key}}
+    {{data['employee'].displayName}}
+    -->
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button>Yes</button>
+  </mat-dialog-actions>
+</form>
