@@ -52,7 +52,8 @@ export class AllocEditComponent implements OnInit, OnDestroy {
     });
 
     this.matcher = new AllocErrorStateMatcher();
-    this.subscription = this.allocForm.valueChanges.subscribe(data => this.validate());
+    this.subscription = this.allocForm.valueChanges.subscribe(data => this.validate(),
+        error => console.error(`Error: ${error}`));
     this.validate();
   }
 
@@ -66,7 +67,8 @@ export class AllocEditComponent implements OnInit, OnDestroy {
     if (!allocation.whrs) {
       allocation.whrs = 0;
     }
-    this.allocService.validateAllocation(allocation).subscribe(res => this.validations = res);
+    this.allocService.validateAllocation(allocation).subscribe(res => this.validations = res,
+      error => console.error(`Error: ${error}`));
   }
 
   onCompleted(): void {
@@ -74,14 +76,21 @@ export class AllocEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.allocService.removeAllocation(this.allocation).subscribe(() => this.onCompleted());
+    this.allocService.removeAllocation(this.allocation).subscribe(
+      data => {},
+      error => console.error(`Error: ${error}`),
+      () => this.onCompleted()
+      );
     this.dialogRef.close();
   }
 
   onUpdate(form) {
     this.allocation.comment = form.value.comment;
     this.allocation.whrs = form.value.whrs;
-    this.allocService.upsertAllocation(this.allocation).subscribe(() => this.onCompleted());
+    this.allocService.upsertAllocation(this.allocation).subscribe(
+        data => {},
+        error => console.error(`Error: ${error}`),
+        () => this.onCompleted());
     this.dialogRef.close();
   }
 

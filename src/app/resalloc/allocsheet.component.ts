@@ -29,8 +29,7 @@ export class AllocSheetComponent implements OnInit, OnDestroy {
 
     this.subscription = this.messageService.getMessage()
       .filter(message => (message.action === MSG_ACTION_REFRESH))
-      .subscribe(message => {this.allocSheet = []; this.render();  /*this.allocService.getAllocations().subscribe(data =>
-        (this.allocations = data, console.log('2>>>> ' + this.allocations.length)) );*/
+      .subscribe(message => {this.allocSheet = []; this.render();
       });
   }
 

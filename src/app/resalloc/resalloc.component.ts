@@ -4,8 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
 import { MatDialog } from '@angular/material';
-import { MSG_ACTION_UPSERT_ALLOCATION, MSG_ACTION_REMOVE_ALLOCATION,
-  MSG_ACTION_REFRESH, MSG_ACTION_SELECT_ALLOCATION, MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE,
+import { MSG_ACTION_REFRESH, MSG_ACTION_SELECT_ALLOCATION, MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE,
   MessageService, Message } from '@service/message.service';
 import { Employee } from '@app/model/staff';
 import { DragulaService } from 'ng2-dragula';
@@ -27,24 +26,9 @@ export class ResAllocComponent implements OnDestroy {
               private dragService: DragulaService) {
     // ToDo: subscribe to SELECT_BACKLOG_ITEM/SUBTASK - highlight corresponding assignments
     this.subscription = this.messageService.getMessage()
-      .filter(message => (message.action === MSG_ACTION_UPSERT_ALLOCATION ||
-        message.action === MSG_ACTION_REMOVE_ALLOCATION ||
-        message.action === MSG_ACTION_SELECT_ALLOCATION))
-      .subscribe(message => {
-        switch (message.action) {
-          case MSG_ACTION_UPSERT_ALLOCATION:
-            //this.upsertAssignment(message.params);
-            this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
-            break;
-          case MSG_ACTION_REMOVE_ALLOCATION:
-            //this.removeAssignment(message.params);
-            this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
-            break;
-          case MSG_ACTION_SELECT_ALLOCATION:
-            this.showAllocation(message.params.MSG_PARAM_ALLOCATION, message.params.MSG_PARAM_EMPLOYEE);
-            break;
-        }
-      });
+      .filter(message => (message.action === MSG_ACTION_SELECT_ALLOCATION))
+      .subscribe(message =>
+            this.showAllocation(message.params.MSG_PARAM_ALLOCATION, message.params.MSG_PARAM_EMPLOYEE));
 
     dragService.drop.asObservable().takeUntil(this.destroy$).subscribe((value) => {
       // subscribe((value) => {
@@ -92,19 +76,32 @@ export class ResAllocComponent implements OnDestroy {
       const alloc_parent = (source.id === 'subtasks') ? el.getAttribute('parent') : null;
       const alloc_date = container.getAttribute('date');
       const alloc_group = container.getAttribute('group');
+      // console.log(alloc_key + ', ' + alloc_parent + ', ' + alloc_date + ', ' + alloc_group);
+
       let employee = new Employee();
       employee.name = container.getAttribute('employee_name');
       employee.displayName = container.getAttribute('employee_displayName');
       // as an option - get assignments via @ViewChild
-      this.allocService.getAllocation(alloc_key, alloc_date, alloc_group, employee.name)
-        .subscribe(data =>
-        { let alloc = this.createAllocation(data, alloc_key, alloc_parent, alloc_date, alloc_group, employee.name);
-        this.showAllocation(alloc, employee); } , error => console.error(`Error: ${error}`));
+      this.getAllocation(alloc_key, alloc_parent, alloc_date, alloc_group, employee);
     }
     this.dragService.find('bag-work').drake.cancel(true);
   }
 
-  private createAllocation(allocation: Allocation, alloc_key: string,
+  private getAllocation(alloc_key: string,
+                        alloc_parent: string, alloc_date: Date,
+                        alloc_group: string, employee: Employee): Allocation {
+
+    let alloc: Allocation;
+    this.allocService.getAllocation(alloc_key, alloc_date, alloc_group, employee.name).subscribe(
+      data => { alloc = data; },
+      error => console.error(`Error: ${error}`),
+      () => { this.showAllocation(
+        this.defineAllocation(alloc, alloc_key, alloc_parent, alloc_date, alloc_group, employee.name),
+        employee); }
+      );
+  }
+
+  private defineAllocation(allocation: Allocation, alloc_key: string,
                            alloc_parent: string, alloc_date: Date,
                            alloc_group: string, alloc_employee: string): Allocation {
     if ((allocation == null) ||
