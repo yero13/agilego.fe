@@ -19,6 +19,7 @@ import { BacklogComponent } from '@app/resalloc/backlog.component';
 import { SubtasksComponent } from '@app/resalloc/subtasks.component';
 import { AllocEditComponent } from '@app/resalloc/allocedit.component';
 import { SprintComponent } from '@app/resalloc/sprint.component';
+import { ResAllocRoutingModule } from '@app/resalloc/resalloc.routing';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { SprintComponent } from '@app/resalloc/sprint.component';
   exports: [ ResAllocComponent ],
   imports: [
     MatTableModule, CommonModule, FlexLayoutModule, DragulaModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule
+    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule, ResAllocRoutingModule
   ],
   providers: [ SprintService, AllocService, BacklogService, MessageService,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher} ],

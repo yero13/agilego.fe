@@ -1,21 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AppRoutingModule} from '@app/app.routing';
 import { AppComponent } from './app.component';
-// import { AllocSheetComponent } from '@app/resalloc/allocsheet.component';
-// import { SprintService } from '@service/sprint.service';
 import { StaffService } from '@service/staff.service';
-// import { AllocService } from '@service/alloc.service';
 import { ResAllocModule } from '@app/resalloc/resalloc.module';
+import { GanttModule } from '@app/gantt/gantt.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent// , AllocSheetComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, ResAllocModule
+    BrowserModule, HttpClientModule, AppRoutingModule, MatTabsModule, ResAllocModule, GanttModule
   ],
-  providers: [/*SprintService, */ StaffService /*, AllocService*/],
-  bootstrap: [AppComponent]
+  providers: [ StaffService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
