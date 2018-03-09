@@ -1,0 +1,39 @@
+<div fxFlex="50%" fxLayout="column">
+  <mat-table [dataSource]="subtasks" [dragula]='"bag-work"' [attr.id]='"subtasks"'>
+    <ng-container matColumnDef="key">
+      <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+      <mat-cell *matCellDef="let subtask" class="main-text">{{subtask.key}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let subtask" class="main-text">{{subtask.type}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
+      <mat-cell *matCellDef="let subtask" class="main-text">{{subtask.priority}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['key', 'type', 'priority']"></mat-header-row>
+    <mat-row *matRowDef="let subtask; columns: ['key', 'type', 'priority']"
+             [ngClass]="{'selected-item': selectedSubtask == subtask}" class="selectable"
+             (click)="selectSubtask(subtask.key)" [attr.key]="subtask.key" [attr.parent]="subtask.parent">
+    </mat-row>
+  </mat-table>
+</div>
+
+<div fxFlex="50%" fxLayout="column">
+  <div *ngIf="selectedSubtask" class="main-text">
+    <div>key: {{selectedSubtask.key}}</div>
+    <div>type: {{selectedSubtask.type}}</div>
+    <div>priority: {{selectedSubtask.priority}}</div>
+    <div>status: {{selectedSubtask.status}}</div>
+    <div>assignee: {{selectedSubtask.assignee_id}}</div>
+    <div>duedate: {{selectedSubtask.duedate}}</div>
+    <div>estimate: {{selectedSubtask.estimate}} (hours)</div>
+    <div>components: {{selectedSubtask.components}}</div>
+    <div>blocked by: {{selectedSubtask.blocked_by}}</div>
+    <div>blocks: {{selectedSubtask.blocks}}</div>
+  </div>
+</div>

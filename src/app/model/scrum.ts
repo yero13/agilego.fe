@@ -28,3 +28,18 @@ export class BacklogItem {
   blocks: string[];
 }
 
+export class Subtask {
+  key: string;
+  //parent
+  type: string;
+  priority: string;
+  status: string;
+  assignee_id: string; //make class Employee??
+  duedate: Date;
+  estimate: number;
+  components: string[];
+  blocked_by: string[];
+  blocks: string[];
+  //ToDo: other properties
+}
+

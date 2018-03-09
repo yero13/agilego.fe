@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Allocation } from '@app/model/scrum';
 import { RestClient } from '@service/rest.client';
-import { sprintf, vsprintf } from 'sprintf-js';
+import { sprintf } from 'sprintf-js';
 import { ValidationResult } from '@app/model/validation';
 
 const SERVICE_ALLOCATIONS = '/assignments';

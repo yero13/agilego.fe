@@ -89,8 +89,7 @@ export class ResAllocComponent implements OnDestroy {
 
   private getAllocation(alloc_key: string,
                         alloc_parent: string, alloc_date: Date,
-                        alloc_group: string, employee: Employee): Allocation {
-
+                        alloc_group: string, employee: Employee): void {
     let alloc: Allocation;
     this.allocService.getAllocation(alloc_key, alloc_date, alloc_group, employee.name).subscribe(
       data => { alloc = data; },

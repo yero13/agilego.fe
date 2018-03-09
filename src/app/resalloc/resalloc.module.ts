@@ -15,12 +15,13 @@ import { BacklogService } from '@service/backlog.service';
 import { AllocSheetComponent } from '@app/resalloc/allocsheet.component';
 import { ResAllocComponent } from '@app/resalloc/resalloc.component';
 import { BacklogComponent } from '@app/resalloc/backlog.component';
+import { SubtasksComponent } from '@app/resalloc/subtasks.component';
 import { AllocEditComponent } from '@app/resalloc/allocedit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AllocSheetComponent, ResAllocComponent, BacklogComponent, AllocEditComponent
+    AllocSheetComponent, ResAllocComponent, BacklogComponent, AllocEditComponent, SubtasksComponent
   ],
   exports: [ ResAllocComponent ],
   imports: [
