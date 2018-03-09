@@ -30,16 +30,15 @@ export class BacklogItem {
 
 export class Subtask {
   key: string;
-  //parent
+  // parent
   type: string;
   priority: string;
   status: string;
-  assignee_id: string; //make class Employee??
+  assignee_id: string;
   duedate: Date;
   estimate: number;
   components: string[];
   blocked_by: string[];
   blocks: string[];
-  //ToDo: other properties
 }
 

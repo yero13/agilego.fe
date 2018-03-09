@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SprintService } from '@service/sprint.service';
 import { AllocService } from '@service/alloc.service';
 import { MessageService } from '@service/message.service';
@@ -17,11 +18,11 @@ import { ResAllocComponent } from '@app/resalloc/resalloc.component';
 import { BacklogComponent } from '@app/resalloc/backlog.component';
 import { SubtasksComponent } from '@app/resalloc/subtasks.component';
 import { AllocEditComponent } from '@app/resalloc/allocedit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SprintComponent } from '@app/resalloc/sprint.component';
 
 @NgModule({
   declarations: [
-    AllocSheetComponent, ResAllocComponent, BacklogComponent, AllocEditComponent, SubtasksComponent
+    AllocSheetComponent, ResAllocComponent, BacklogComponent, AllocEditComponent, SubtasksComponent, SprintComponent
   ],
   exports: [ ResAllocComponent ],
   imports: [

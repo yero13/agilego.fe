@@ -120,7 +120,8 @@ export class ResAllocComponent implements OnDestroy {
   }
 
   showAllocation(alloc: Allocation, employee: Employee): void {
-     this.dialog.open(AllocEditComponent, {height: '550px', width: '450px', data: { 'allocation': alloc, 'employee': employee }});
+     this.dialog.open(AllocEditComponent, {height: '550px', width: '450px',
+       data: { 'allocation': alloc, 'employee': employee }});
   }
 
   ngOnDestroy() {
