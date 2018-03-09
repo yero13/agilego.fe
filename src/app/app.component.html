@@ -1,6 +1,10 @@
 <nav mat-tab-nav-bar>
-  <a mat-tab-link [routerLink]="gantt" routerLinkActive="active" #rla="routerLinkActive">Gantt</a>
-  <a mat-tab-link [routerLink]="resalloc" routerLinkActive="active" #rla="routerLinkActive" >Resource allocation</a>
-  <a mat-tab-link>Plan vs Fact</a>
+  <a mat-tab-link
+     *ngFor="let routeLink of routeLinks; let i = index"
+     [routerLink]="routeLink.link"
+     [active]="activeLinkIndex === i"
+     (click)="activeLinkIndex = i">
+    {{routeLink.label}}
+  </a>
 </nav>
 <router-outlet></router-outlet>

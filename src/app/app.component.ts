@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'agilego';
+
+  routeLinks: any[];
+  activeLinkIndex = 0;
+  constructor(private router: Router) {
+    this.routeLinks = [
+      {label: 'Gantt', link: 'gantt'},
+      {label: 'Resource allocation', link: 'resalloc'}];
+  }
 }
