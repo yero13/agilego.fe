@@ -5,7 +5,7 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
 import { MatDialog } from '@angular/material';
 import { MSG_ACTION_UPSERT_ALLOCATION, MSG_ACTION_REMOVE_ALLOCATION,
-  MSG_ACTION_REFRESH, MSG_ACTION_SELECT_ALLOCATION,
+  MSG_ACTION_REFRESH, MSG_ACTION_SELECT_ALLOCATION, MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE,
   MessageService, Message } from '@service/message.service';
 import { Employee } from '@app/model/staff';
 import { DragulaService } from 'ng2-dragula';
@@ -41,7 +41,7 @@ export class ResAllocComponent implements OnDestroy {
             this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
             break;
           case MSG_ACTION_SELECT_ALLOCATION:
-            //this.showAssignment(message.params.MSG_PARAM_ASSIGNMENT, message.params.MSG_PARAM_EMPLOYEE);
+            this.showAllocation(message.params.MSG_PARAM_ALLOCATION, message.params.MSG_PARAM_EMPLOYEE);
             break;
         }
       });

@@ -16,9 +16,14 @@
 
   <ng-container *ngFor="let date of timeline" matColumnDef="{{date}}">
     <mat-header-cell *matHeaderCellDef align="center">{{date}}</mat-header-cell>
-    <mat-cell *matCellDef="let row" class="cell" div [dragula]='"bag-work"' [attr.id]='"work-dest"' [attr.employee_name]="row['employee'].name" [attr.employee_displayName]="row['employee'].displayName" [attr.date]="date" [attr.group]="row['group'].group">
+    <mat-cell *matCellDef="let row" class="cell" div [dragula]='"bag-work"'
+              [attr.id]='"work-dest"' [attr.employee_name]="row['employee'].name"
+              [attr.employee_displayName]="row['employee'].displayName"
+              [attr.date]="date" [attr.group]="row['group'].group">
       <ng-container *ngFor="let alloc of row[date]">
-        <div class="main-text text-center cell-item selectable">{{alloc.key}}&nbsp;&nbsp;{{alloc.whrs}}</div>
+        <div class="main-text text-center cell-item selectable" (click)="onClick(alloc, row['employee'])">
+          {{alloc.key}}&nbsp;&nbsp;{{alloc.whrs}}
+        </div>
       </ng-container>
     </mat-cell>
   </ng-container>

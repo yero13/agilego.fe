@@ -7,31 +7,12 @@
   Group: {{allocation.group}}&nbsp;&nbsp;Employee: {{employee.displayName}}<br/>
 </div>
 
-
-
 <div *ngIf="validations">
   <h5>Warnings</h5>
   <div *ngFor="let validation of validations" class="warning">{{validation.severity}}: {{validation.message}}</div>
 </div>
 <br>
 <form [formGroup]="allocForm" #f="ngForm" (ngSubmit)="onUpdate(f)">
-<!--
-
-  Issue: {{assignment.key}}<br/><br/>
-  <span *ngIf="assignment.parent">Subtask of {{assignment.parent}}<br/><br/></span>
-
-  <br/>
-  Assigned to<br/>
-  Group: {{assignment.group}}&nbsp;&nbsp;Employee: {{employee.displayName}}<br/><br/>
-
-  <div *ngIf="validations">
-    <div>Warnings</div>
-    <div *ngFor="let validation of validations">{{validation.severity}}: {{validation.message}}</div>
-  </div>
-
-
--->
-
   <mat-dialog-content>
     <div>
       <mat-form-field hintLabel="Hours allocated">

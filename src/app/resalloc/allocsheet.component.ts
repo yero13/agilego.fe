@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { Group } from '@app/model/staff';
+import { Employee, Group } from '@app/model/staff';
 import { Allocation } from '@app/model/scrum';
 import { SprintService } from '@service/sprint.service';
 import { StaffService } from '@service/staff.service';
 import { AllocService } from '@service/alloc.service';
+import { MessageService, MSG_ACTION_SELECT_ALLOCATION, Message,
+  MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE } from '@service/message.service';
 
 @Component({
   selector: 'app-allocsheet',
@@ -19,6 +21,7 @@ export class AllocSheetComponent implements OnInit {
 
   constructor(private sprintService: SprintService,
               private staffService: StaffService,
+              private messageService: MessageService,
               private allocService: AllocService) { }
 
   ngOnInit(): void {
@@ -67,4 +70,8 @@ export class AllocSheetComponent implements OnInit {
     return result;
   }
 
+  onClick(allocation: Allocation, employee: Employee) {
+    this.messageService.sendMessage(new Message(MSG_ACTION_SELECT_ALLOCATION,
+      {MSG_PARAM_ALLOCATION: allocation, MSG_PARAM_EMPLOYEE: employee}));
+  }
 }
