@@ -96,7 +96,7 @@ export class ResAllocComponent implements OnDestroy {
       employee.name = container.getAttribute('employee_name');
       employee.displayName = container.getAttribute('employee_displayName');
       // as an option - get assignments via @ViewChild
-      this.allocService.getAssignment(alloc_key, alloc_date, alloc_group, employee.name)
+      this.allocService.getAllocation(alloc_key, alloc_date, alloc_group, employee.name)
         .subscribe(data =>
         { let alloc = this.createAllocation(data, alloc_key, alloc_parent, alloc_date, alloc_group, employee.name);
         this.showAllocation(alloc, employee); } , error => console.error(`Error: ${error}`));
@@ -125,20 +125,13 @@ export class ResAllocComponent implements OnDestroy {
 
   showAllocation(alloc: Allocation, employee: Employee): void {
      this.dialog.open(AllocEditComponent, {height: '550px', width: '450px', data: { 'allocation': alloc, 'employee': employee }});
-    // console.dir(employee);
-    // console.log('aaaaaaaaaaaaaaaaa');
-    // this.modalDataService.setData({MSG_PARAM_ASSIGNMENT: assignment, MSG_PARAM_EMPLOYEE: employee});
-    // this.bsModalRef = this.modalService.show(AssignmentEditComponent);
-    // this.messageService.sendMessage(new Message(MSG_ACTION_EDIT_ASSIGNMENT, {MSG_PARAM_ASSIGNMENT: assignment, MSG_PARAM_EMPLOYEE: employee}));
-    // this.bsModalRef.content.employee = employee;
-    // this.bsModalRef.content.assignment = assignment; // ToDo: check if possible to set parameters before showing component and using setter
   }
-
-
 
   ngOnDestroy() {
     this.destroy$.next();
     this.dragService.destroy('bag-work');
     this.subscription.unsubscribe();
   }
+
+
 }

@@ -2,7 +2,7 @@
 
 <div class="main-text">
   Issue: {{allocation.key}}<br/>
-  <span *ngIf="allocation.parent">Subtask of {{assignment.parent}}<br/></span>
+  <span *ngIf="allocation.parent">Subtask of {{allocation.parent}}<br/></span>
   Assigned to<br/>
   Group: {{allocation.group}}&nbsp;&nbsp;Employee: {{employee.displayName}}<br/>
 </div>
@@ -26,7 +26,6 @@
         <textarea matInput id="comment" [formControl]="comment" maxlength="150" placeholder="Comment" rows="5" cols="130"></textarea>
       </mat-form-field>
     </div>
-
   </mat-dialog-content>
   <mat-dialog-actions>
     <div class="button-row">

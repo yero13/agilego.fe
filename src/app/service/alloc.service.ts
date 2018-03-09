@@ -15,28 +15,20 @@ export class AllocService extends RestClient {
     return this.http.get<Allocation[]>(this.getUrl(SERVICE_ALLOCATIONS));
   }
 
-  getAssignment(key: string, date: Date, group: string, employee: string): Observable<Allocation> {
+  getAllocation(key: string, date: Date, group: string, employee: string): Observable<Allocation> {
     return this.http.get<Allocation>(this.getUrl(sprintf(SERVICE_ALLOCATION_GET, key, date, group, employee)));
   }
 
-  validateAllocation(allocation: Allocation): Observable<ValidationResult[]> {
-    return this.http.post<ValidationResult[]>(this.getUrl(SERVICE_ALLOCATION_VALIDATE), allocation);
-  }
-/*
-  upsertAssignment(assignment: Allocation): Promise<number> {
-    return this.http.post(this.getUrl(SERVICE_ALLOCATION), assignment, this.options)
-      .toPromise()
-      .then(response => response.json() || {})
-      .catch(error => console.error(error));
+  validateAllocation(alloc: Allocation): Observable<ValidationResult[]> {
+    return this.http.post<ValidationResult[]>(this.getUrl(SERVICE_ALLOCATION_VALIDATE), alloc);
   }
 
-  removeAssignment(assignment_params: Allocation): Promise<number> {
-    return this.http.delete(this.getUrl(sprintf(SERVICE_ALLOCATION_REMOVE, assignment_params.key,
-      assignment_params.date, assignment_params.group, assignment_params.employee)), this.options)
-      .toPromise()
-      .then(response => response.json() || {})
-      .catch(error => console.error(error));
+  removeAllocation(alloc: Allocation): Observable<number> {
+    return this.http.delete<number>(this.getUrl(sprintf(SERVICE_ALLOCATION_REMOVE,
+      alloc.key, alloc.date, alloc.group, alloc.employee)));
   }
 
-*/
+  upsertAllocation(alloc: Allocation): Observable<number> {
+    return this.http.post<number>(this.getUrl(SERVICE_ALLOCATION), alloc);
+  }
 }
