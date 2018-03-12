@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { Employee, Group } from '@app/model/staff';
+import { Employee, Group } from '@app/model/team';
 import { Allocation } from '@app/model/scrum';
 import { SprintService } from '@service/sprint.service';
-import { StaffService } from '@service/staff.service';
+import { TeamService } from '@service/team.service';
 import { AllocService } from '@service/alloc.service';
 import { MessageService, MSG_ACTION_SELECT_ALLOCATION, Message,
   MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE, MSG_ACTION_REFRESH } from '@service/message.service';
@@ -22,10 +22,9 @@ export class AllocSheetComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private sprintService: SprintService,
-              private staffService: StaffService,
+              private staffService: TeamService,
               private messageService: MessageService,
               private allocService: AllocService) {
-
 
     this.subscription = this.messageService.getMessage()
       .filter(message => (message.action === MSG_ACTION_REFRESH))

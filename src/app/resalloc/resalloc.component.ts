@@ -6,7 +6,7 @@ import 'rxjs/add/operator/filter';
 import { MatDialog } from '@angular/material';
 import { MSG_ACTION_REFRESH, MSG_ACTION_SELECT_ALLOCATION, MSG_PARAM_ALLOCATION, MSG_PARAM_EMPLOYEE,
   MessageService, Message } from '@service/message.service';
-import { Employee } from '@app/model/staff';
+import { Employee } from '@app/model/team';
 import { DragulaService } from 'ng2-dragula';
 import { Allocation } from '@app/model/scrum';
 import { AllocService } from '@service/alloc.service';

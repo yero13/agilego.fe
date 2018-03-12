@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Allocation } from '@app/model/scrum';
-import { Employee } from '@app/model/staff';
+import { Employee } from '@app/model/team';
 import { ValidationResult } from '@app/model/validation';
 import { AllocService } from '@service/alloc.service';
 import { MessageService, Message, MSG_ACTION_REFRESH } from '@service/message.service';

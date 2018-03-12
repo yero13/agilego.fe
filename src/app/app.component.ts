@@ -13,6 +13,8 @@ export class AppComponent {
   constructor(private router: Router) {
     this.routeLinks = [
       {label: 'Gantt', link: 'gantt'},
-      {label: 'Resource allocation', link: 'resalloc'}];
+      {label: 'Resource allocation', link: 'resalloc'},
+      {label: 'Team', link: 'team'}
+    ];
   }
 }
