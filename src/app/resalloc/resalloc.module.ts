@@ -17,7 +17,7 @@ import { AllocSheetComponent } from '@app/resalloc/allocsheet.component';
 import { ResAllocComponent } from '@app/resalloc/resalloc.component';
 import { BacklogComponent } from '@app/resalloc/backlog.component';
 import { SubtasksComponent } from '@app/resalloc/subtasks.component';
-import { AllocEditComponent } from '@app/resalloc/allocedit.component';
+import { AllocEditComponent } from '@app/resalloc/popup/allocedit.component';
 import { SprintComponent } from '@app/resalloc/sprint.component';
 import { ResAllocRoutingModule } from '@app/resalloc/resalloc.routing';
 

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { TeamService} from '@service/team.service';
 import { MessageService, MSG_ACTION_REFRESH } from '@service/message.service';
 import { Group, Employee } from '@app/model/team';
 // import { GroupEditComponent } from './popup/group.component';
-// import { ComponentAddComponent } from './popup/component.component';
 // import { EmployeeAddComponent } from './popup/employee.component';
 import { Subscription } from 'rxjs/Subscription';
+import { ComponentAddComponent } from '@app/team/popup/component.component';
 
 @Component({
   selector: 'app-team',
@@ -16,6 +17,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private messageService: MessageService,
+              public dialog: MatDialog,
               private teamService: TeamService) {
 
     this.subscription = this.messageService.getMessage()
@@ -35,6 +37,11 @@ export class TeamComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  addComponent(group): void {
+    this.dialog.open(ComponentAddComponent, {height: '250px', width: '250px', data: { 'group': group }});
+  }
+
 
   /*
   createGroup(): void {

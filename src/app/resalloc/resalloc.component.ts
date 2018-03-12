@@ -10,7 +10,7 @@ import { Employee } from '@app/model/team';
 import { DragulaService } from 'ng2-dragula';
 import { Allocation } from '@app/model/scrum';
 import { AllocService } from '@service/alloc.service';
-import { AllocEditComponent } from '@app/resalloc/allocedit.component';
+import { AllocEditComponent } from '@app/resalloc/popup/allocedit.component';
 
 @Component({
   selector: 'app-resalloc',

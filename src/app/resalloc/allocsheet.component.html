@@ -21,8 +21,13 @@
               [attr.employee_displayName]="row['employee'].displayName"
               [attr.date]="date" [attr.group]="row['group'].group">
       <ng-container *ngFor="let alloc of row[date]">
-        <div class="main-text text-center cell-item selectable" (click)="onClick(alloc, row['employee'])">
-          {{alloc.key}}&nbsp;{{alloc.whrs}}
+        <div fxLayout="row">
+        <div class="main-text text-center cell-item selectable" (click)="onClick(alloc, row['employee'])" fxFlex="75%" fxLayout="column">
+          {{alloc.key}}
+        </div>
+        <div class="main-text text-center cell-item selectable" (click)="onClick(alloc, row['employee'])" fxFlex="25%" fxLayout="column">
+          {{alloc.whrs}}
+        </div>
         </div>
       </ng-container>
     </mat-cell>
