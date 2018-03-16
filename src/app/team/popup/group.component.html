@@ -1,0 +1,24 @@
+<h4 mat-dialog-title>Edit group</h4>
+
+<div *ngIf="is_group_exists">
+  <div class="warning">Group already exist</div>
+</div>
+<br>
+<form [formGroup]="groupForm" #f="ngForm" (ngSubmit)="onUpdate(f)">
+  <mat-dialog-content>
+    <div>
+      <mat-form-field hintLabel="Group name">
+        <input matInput type="text" id="group_name" [formControl]="group_name" maxlength="20" placeholder="Group name" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="group_name.hasError('required')">Name is required</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="button-row">
+      <button mat-raised-button type="submit" [disabled]="groupForm.invalid || is_group_exists">Update</button>
+      <button mat-raised-button type="button" (click)="onDelete()" *ngIf="!is_new_group">Delete</button>
+      <button mat-raised-button type="button" mat-dialog-close="">Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>
+

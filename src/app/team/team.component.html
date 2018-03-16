@@ -1,52 +1,71 @@
-<div fxFlex="50%"> <!--fxFlex="50%" fxLayout="column"-->
-  <mat-table [dataSource]="groups">
-    <ng-container matColumnDef="group">
-      <mat-header-cell *matHeaderCellDef class="text-center">Group</mat-header-cell>
-      <mat-cell *matCellDef="let group" class="main-text">{{group.group}}</mat-cell>
-    </ng-container>
+<div fxLayout="column">
+  <div>
+    <button mat-button (click)="addGroup()">Add group</button>
+  </div>
 
-    <ng-container matColumnDef="component">
-      <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="20%">Component</mat-header-cell>
-      <mat-cell *matCellDef="let group" class="cell" fxFlex="20%">
-        <ng-container *ngFor="let component of group.components">
-          <div class="main-text cell-item selectable"> <!--(click)="onClick(alloc, row['employee'])-->
-            {{component}}
-          </div>
-        </ng-container>
-      </mat-cell>
-    </ng-container>
+  <div>
+    <mat-table [dataSource]="groups">
+      <ng-container matColumnDef="group">
+        <mat-header-cell *matHeaderCellDef class="text-center">Group</mat-header-cell>
+        <mat-cell *matCellDef="let group" class="main-text">
+          <button mat-button (click)="editGroup(group)">{{group.group}}</button>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="employee">
-      <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="35%">Employee</mat-header-cell>
-      <mat-cell *matCellDef="let group" class="cell" fxFlex="35%">
-        <ng-container *ngFor="let employee of group.employees">
-          <div fxLayout="row">
-            <div class="main-text cell-item selectable" fxLayout="column" fxFlex="1 1 75%"> <!--(click)="onClick(alloc, row['employee'])-->
-              {{employee.displayName}}
+      <ng-container matColumnDef="component">
+        <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="20%">Component</mat-header-cell>
+        <mat-cell *matCellDef="let group" class="cell" fxFlex="20%">
+          <ng-container *ngFor="let component of group.components">
+            <div fxLayout="row">
+              <div class="main-text cell-item selectable" fxLayout="column" fxFlex="1 1 80%">
+                {{component}}
+              </div>
+              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 20%">
+                <button mat-icon-button (click)="removeComponent(group, component)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </div>
-            <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 25%"> <!--(click)="onClick(alloc, row['employee'])-->
-              8
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="employee">
+        <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="35%">Employee</mat-header-cell>
+        <mat-cell *matCellDef="let group" class="cell" fxFlex="35%">
+          <ng-container *ngFor="let employee of group.employees">
+            <div fxLayout="row">
+              <div class="main-text cell-item selectable" fxLayout="column" fxFlex="1 1 80%"> <!--(click)="onClick(alloc, row['employee'])-->
+                {{employee.displayName}}
+              </div>
+              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%"> <!--(click)="onClick(alloc, row['employee'])-->
+                8
+              </div>
+              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%">
+                <button mat-icon-button (click)="removeEmployee(group, employee)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </div>
-          </div>
-        </ng-container>
-      </mat-cell>
-    </ng-container>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="capacity">
-      <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="10%">Capacity</mat-header-cell>
-      <mat-cell *matCellDef="let group" class="main-text text-center" fxFlex="10%">{{group.capacity}}</mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="capacity">
+        <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="10%">Capacity</mat-header-cell>
+        <mat-cell *matCellDef="let group" class="main-text text-center" fxFlex="10%">{{group.capacity}}</mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="operations">
-      <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="12%">&nbsp;</mat-header-cell>
-      <mat-cell *matCellDef="let group" class="main-text" fxFlex="12%">
-        <div><a (click)="addComponent(group)">Add component</a></div>
-        <div><a href="#">Add employee</a></div>
-        <div><a href="#">Remove group</a></div>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="operations">
+        <mat-header-cell *matHeaderCellDef class="text-center" fxFlex="17%">&nbsp;</mat-header-cell>
+        <mat-cell *matCellDef="let group" class="main-text" fxFlex="17%">
+          <button mat-button (click)="addComponent(group)">Add component</button>
+          <button mat-button (click)="addComponent(group)">Add employee</button>
+        </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['group', 'component', 'employee', 'capacity', 'operations']"></mat-header-row>
-    <mat-row *matRowDef="let item; columns: ['group', 'component', 'employee', 'capacity', 'operations']"></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="['group', 'component', 'employee', 'capacity', 'operations']"></mat-header-row>
+      <mat-row *matRowDef="let item; columns: ['group', 'component', 'employee', 'capacity', 'operations']"></mat-row>
+    </mat-table>
+  </div>
 </div>

@@ -1,20 +1,13 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrStateMatcher } from '@app/util/errstate';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Allocation } from '@app/model/scrum';
 import { Employee } from '@app/model/team';
 import { ValidationResult } from '@app/model/validation';
 import { AllocService } from '@service/alloc.service';
 import { MessageService, Message, MSG_ACTION_REFRESH } from '@service/message.service';
-
-export class AllocErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
 @Component({
   selector: 'app-allocedit',
@@ -28,7 +21,7 @@ export class AllocEditComponent implements OnInit, OnDestroy {
   allocForm: FormGroup;
   whrs: FormControl;
   comment: FormControl;
-  matcher: AllocErrorStateMatcher;
+  matcher: ErrStateMatcher;
   subscription: Subscription;
 
   constructor(public dialogRef: MatDialogRef<AllocEditComponent>,
@@ -51,7 +44,7 @@ export class AllocEditComponent implements OnInit, OnDestroy {
       'whrs': this.whrs
     });
 
-    this.matcher = new AllocErrorStateMatcher();
+    this.matcher = new ErrStateMatcher();
     this.subscription = this.allocForm.valueChanges.subscribe(data => this.validate(),
         error => console.error(`Error: ${error}`));
     this.validate();
@@ -93,5 +86,4 @@ export class AllocEditComponent implements OnInit, OnDestroy {
         () => this.onCompleted());
     this.dialogRef.close();
   }
-
 }

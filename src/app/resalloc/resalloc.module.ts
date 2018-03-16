@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule,
-  ErrorStateMatcher, ShowOnDirtyErrorStateMatcher
+  MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +19,7 @@ import { SubtasksComponent } from '@app/resalloc/subtasks.component';
 import { AllocEditComponent } from '@app/resalloc/popup/allocedit.component';
 import { SprintComponent } from '@app/resalloc/sprint.component';
 import { ResAllocRoutingModule } from '@app/resalloc/resalloc.routing';
+import { UtilModule } from '@app/util/util.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,10 @@ import { ResAllocRoutingModule } from '@app/resalloc/resalloc.routing';
   exports: [ ResAllocComponent ],
   imports: [
     MatTableModule, CommonModule, FlexLayoutModule, DragulaModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule, ResAllocRoutingModule
+    MatInputModule, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule, ResAllocRoutingModule,
+    UtilModule
   ],
-  providers: [ SprintService, AllocService, BacklogService, MessageService,
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher} ],
+  providers: [ SprintService, AllocService, BacklogService, MessageService ],
   entryComponents: [ AllocEditComponent ],
   bootstrap: [ ResAllocComponent ]
 })

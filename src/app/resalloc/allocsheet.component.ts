@@ -60,8 +60,15 @@ export class AllocSheetComponent implements OnInit, OnDestroy {
   }
 
   private fillAllocations(): void {
+    console.dir(this.groups);
+    console.dir(this.timeline);
+    console.dir(this.allocations);
+
     this.allocSheet = new Array<any>();
     for (const group of this.groups) {
+      if (!group.employees) {
+        continue;
+      }
       for (const employee of group.employees) {
         const employeeAllocs = new Object();
         employeeAllocs['group'] = group;

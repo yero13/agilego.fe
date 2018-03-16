@@ -31,8 +31,6 @@ export class ResAllocComponent implements OnDestroy {
             this.showAllocation(message.params.MSG_PARAM_ALLOCATION, message.params.MSG_PARAM_EMPLOYEE));
 
     dragService.drop.asObservable().takeUntil(this.destroy$).subscribe((value) => {
-      // subscribe((value) => {
-      // console.log(`drop: ${value[0]}` + JSON.stringify(value));
       this.onDrop(value.slice(1));
     });
 
@@ -76,7 +74,6 @@ export class ResAllocComponent implements OnDestroy {
       const alloc_parent = (source.id === 'subtasks') ? el.getAttribute('parent') : null;
       const alloc_date = container.getAttribute('date');
       const alloc_group = container.getAttribute('group');
-      // console.log(alloc_key + ', ' + alloc_parent + ', ' + alloc_date + ', ' + alloc_group);
 
       let employee = new Employee();
       employee.name = container.getAttribute('employee_name');
@@ -112,7 +109,6 @@ export class ResAllocComponent implements OnDestroy {
       res_alloc.date = alloc_date;
       res_alloc.group = alloc_group;
       res_alloc.employee = alloc_employee;
-      // console.log(JSON.stringify(res_assignment));
       return res_alloc;
     } else {
       return allocation;

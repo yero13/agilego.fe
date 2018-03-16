@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { TeamService} from '@service/team.service';
 import { MessageService, MSG_ACTION_REFRESH } from '@service/message.service';
 import { Group, Employee } from '@app/model/team';
-// import { GroupEditComponent } from './popup/group.component';
+import { GroupEditComponent } from './popup/group.component';
 // import { EmployeeAddComponent } from './popup/employee.component';
 import { Subscription } from 'rxjs/Subscription';
 import { ComponentAddComponent } from '@app/team/popup/component.component';
@@ -23,7 +23,6 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.subscription = this.messageService.getMessage()
       .filter(message => (message.action === MSG_ACTION_REFRESH))
       .subscribe(message => { this.getGroups(); });
-
   }
 
   getGroups(): void {
@@ -42,50 +41,25 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.dialog.open(ComponentAddComponent, {height: '250px', width: '250px', data: { 'group': group }});
   }
 
-
-  /*
-  createGroup(): void {
-    this.modalDataService.setData(this.groups);
-    this.bsModalRef = this.modalService.show(GroupEditComponent);
+  editGroup(group): void {
+    this.dialog.open(GroupEditComponent, {height: '250px', width: '450px', data: { 'group': group }});
   }
 
-  removeGroup(group): void {
-    // ToDo: move to removeGroup on BE
-    let assignment = new Assignment();
-    assignment.group = group.group;
-    // this.planningService.removeAssignment(assignment).then(result => res = result);
-    this.planningService.removeGroup(group).then(result => this.getGroups());
-    //  this.groups.splice(this.groups.indexOf(group), 1); //ToDo: move to refresh
-    //  this.getGroups();
-  }
-
-  addComponent(group): void {
-    this.modalDataService.setData(group);
-    this.bsModalRef = this.modalService.show(ComponentAddComponent);
-  }
-
-  addEmployee(group): void {
-    this.modalDataService.setData(group);
-    this.bsModalRef = this.modalService.show(EmployeeAddComponent);
-  }
-
-  removeComponent(group: Group, component: string): number {
-    let res;
-    group.components.splice(group.components.indexOf(component), 1);
-    this.planningService.updateGroup(group).then(result => res = result);
-    return res;
+  addGroup(): void {
+    this.dialog.open(GroupEditComponent, {height: '250px', width: '450px', data: { 'group': new Group() }});
   }
 
   removeEmployee(group: Group, employee: Employee): number {
     let res;
     group.employees.splice(group.employees.indexOf(employee), 1);
-    // ToDo: move to updateGroup on BE
-    let assignment = new Assignment();
-    assignment.group = group.group;
-    assignment.employee = employee.name;
-    // this.planningService.removeAssignment(assignment).then(result => res = result);
-    this.planningService.updateGroup(group).then(result => res = result);
+    this.teamService.updateGroup(group, group.group).subscribe(result => {res = result});
     return res;
   }
-  */
+
+  removeComponent(group: Group, component: string): number {
+    let res;
+    group.components.splice(group.components.indexOf(component), 1);
+    this.teamService.updateGroup(group, group.group).subscribe(result => {res = result});
+    return res;
+  }
 }
