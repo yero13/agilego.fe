@@ -1,3 +1,20 @@
-{{group}}
-<br>
-{{components}}
+<h4 mat-dialog-title>Add component</h4>
+<form [formGroup]="componentForm" #f="ngForm" (ngSubmit)="onUpdate(f)">
+  <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Component" [formControl]="component" required>
+          <mat-option *ngFor="let component of components" [value]="component">
+            {{component}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="button-row">
+      <button mat-raised-button type="submit" [disabled]="componentForm.invalid">Update</button>
+      <button mat-raised-button type="button" mat-dialog-close="">Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>

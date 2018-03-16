@@ -22,11 +22,12 @@ export class TeamComponent implements OnInit, OnDestroy {
 
     this.subscription = this.messageService.getMessage()
       .filter(message => (message.action === MSG_ACTION_REFRESH))
-      .subscribe(message => { this.getGroups(); });
+      .subscribe(message => { this.groups.pop(); });
   }
 
   getGroups(): void {
-    this.teamService.getGroups().subscribe(groups => this.groups = groups);
+    this.teamService.getGroups().subscribe(groups => this.groups = groups,
+        error => console.error(`Error: ${error}`));
   }
 
   ngOnInit(): void {
