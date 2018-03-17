@@ -16,7 +16,7 @@
   <mat-dialog-content>
     <div>
       <mat-form-field hintLabel="Hours allocated">
-        <input matInput type="text" id="whrs" [formControl]="whrs" maxlength="4" placeholder="Estimate" [errorStateMatcher]="matcher">
+        <input matInput type="text" id="whrs" [formControl]="whrs" maxlength="4" placeholder="Estimate">
         <mat-error *ngIf="whrs.hasError('pattern') && !whrs.hasError('required')">Please enter valid number</mat-error>
         <mat-error *ngIf="whrs.hasError('required')">Value is required</mat-error>
       </mat-form-field>

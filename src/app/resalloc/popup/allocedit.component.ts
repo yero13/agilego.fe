@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ErrStateMatcher } from '@app/util/errstate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Allocation } from '@app/model/scrum';
@@ -21,7 +20,6 @@ export class AllocEditComponent implements OnInit, OnDestroy {
   allocForm: FormGroup;
   whrs: FormControl;
   comment: FormControl;
-  matcher: ErrStateMatcher;
   subscription: Subscription;
 
   constructor(public dialogRef: MatDialogRef<AllocEditComponent>,
@@ -38,13 +36,10 @@ export class AllocEditComponent implements OnInit, OnDestroy {
       Validators.maxLength(4),
       Validators.pattern('^(?!0*(\\.0+)?$)(\\d{1}|\\d{1}\\.\\d{1,2})$')]);
     this.comment = new FormControl(this.allocation.comment, [Validators.maxLength(150)]);
-
     this.allocForm = new FormGroup({
       'comment': this.comment,
       'whrs': this.whrs
     });
-
-    this.matcher = new ErrStateMatcher();
     this.subscription = this.allocForm.valueChanges.subscribe(data => this.validate(),
         error => console.error(`Error: ${error}`));
     this.validate();

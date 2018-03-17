@@ -5,7 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule,
   MatIconModule, MatSelectModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
-import { UtilModule } from '@app/util/util.module';
 import { GroupEditComponent } from './popup/group.component';
 import { EmployeeEditComponent } from '@app/team/popup/employee.component';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +23,7 @@ import { TeamService} from '@service/team.service';
   ],
   imports: [
     CommonModule, TeamRoutingModule, MatTableModule, FlexLayoutModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, FormsModule, ReactiveFormsModule, UtilModule
+    MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, FormsModule, ReactiveFormsModule
   ],
   providers: [ TeamService, ResourceService ],
   entryComponents: [ ComponentAddComponent, GroupEditComponent, EmployeeEditComponent ],

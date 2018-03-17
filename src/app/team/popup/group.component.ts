@@ -1,6 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ErrStateMatcher } from '@app/util/errstate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Group } from '@app/model/team';
@@ -17,7 +16,6 @@ export class GroupEditComponent implements OnInit, OnDestroy {
   is_group_exists: boolean;
   groupForm: FormGroup;
   group_name: FormControl;
-  matcher: ErrStateMatcher;
   subscription: Subscription;
 
   constructor(public dialogRef: MatDialogRef<GroupEditComponent>,
@@ -36,7 +34,6 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     this.groupForm = new FormGroup({
       'group_name': this.group_name
     });
-    this.matcher = new ErrStateMatcher();
     this.subscription = this.groupForm.valueChanges.subscribe(data => this.validate(),
       error => console.error(`Error: ${error}`));
   }
