@@ -1,0 +1,27 @@
+<h4 mat-dialog-title>Edit employee</h4>
+<form [formGroup]="employeeForm" #f="ngForm" (ngSubmit)="onUpdate(f)">
+  <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Employee" [formControl]="employee" required>
+          <mat-option *ngFor="let employee of employees" [value]="employee.name">
+            {{employee.displayName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field hintLabel="Working hours per sprint">
+        <input matInput type="text" id="capacity" [formControl]="capacity" maxlength="2" placeholder="Capacity">
+        <mat-error *ngIf="capacity.hasError('pattern') && !capacity.hasError('required')">Please enter valid number</mat-error>
+        <mat-error *ngIf="capacity.hasError('required')">Value is required</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="button-row">
+      <button mat-raised-button type="submit" [disabled]="employeeForm.invalid">Update</button>
+      <button mat-raised-button type="button" mat-dialog-close="">Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>

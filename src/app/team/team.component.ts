@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material';
 import { TeamService} from '@service/team.service';
 import { MessageService, MSG_ACTION_REFRESH } from '@service/message.service';
 import { Group, Employee } from '@app/model/team';
-import { GroupEditComponent } from './popup/group.component';
-// import { EmployeeAddComponent } from './popup/employee.component';
 import { Subscription } from 'rxjs/Subscription';
+import { GroupEditComponent } from '@app/team/popup/group.component';
+import { EmployeeEditComponent } from '@app/team/popup/employee.component';
 import { ComponentAddComponent } from '@app/team/popup/component.component';
 
 @Component({
@@ -40,6 +40,10 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   addComponent(group): void {
     this.dialog.open(ComponentAddComponent, {height: '250px', width: '250px', data: { 'group': group }});
+  }
+
+  addEmployee(group): void {
+    this.dialog.open(EmployeeEditComponent, {height: '300px', width: '300px', data: { 'group': group }});
   }
 
   editGroup(group): void {
