@@ -38,8 +38,9 @@ export class ComponentAddComponent implements OnInit {
   onUpdate(form) {
     this.group.components.push(this.componentForm.value.component);
     this.teamService.updateGroup(this.group, this.group.group).subscribe(
-      data => {},error => console.error(`Error: ${error}`));
-    this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
+      data => {},
+      error => console.error(`Error: ${error}`),
+      () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {})));
     this.dialogRef.close();
   }
 

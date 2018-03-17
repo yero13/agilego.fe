@@ -7,8 +7,12 @@
     <mat-table [dataSource]="groups">
       <ng-container matColumnDef="group">
         <mat-header-cell *matHeaderCellDef class="text-center">Group</mat-header-cell>
-        <mat-cell *matCellDef="let group" class="main-text">
-          <button mat-button (click)="editGroup(group)">{{group.group}}</button>
+        <mat-cell *matCellDef="let group">
+          <div fxLayout="row">
+            <div fxLayout="column" fxFlex="1 1 70%">{{group.group}}</div>
+            <div fxLayout="column" fxFlex="1 1 15%"><button mat-icon-button (click)="editGroup(group)"><mat-icon>edit</mat-icon></button></div>
+            <div fxLayout="column" fxFlex="1 1 15%"><button mat-icon-button (click)="removeGroup(group)"><mat-icon>delete</mat-icon></button></div>
+          </div>
         </mat-cell>
       </ng-container>
 
@@ -17,7 +21,7 @@
         <mat-cell *matCellDef="let group" class="cell" fxFlex="20%">
           <ng-container *ngFor="let component of group.components">
             <div fxLayout="row">
-              <div class="main-text cell-item selectable" fxLayout="column" fxFlex="1 1 80%">
+              <div class="main-text cell-item" fxLayout="column" fxFlex="1 1 80%">
                 {{component}}
               </div>
               <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 20%">
@@ -35,11 +39,16 @@
         <mat-cell *matCellDef="let group" class="cell" fxFlex="35%">
           <ng-container *ngFor="let employee of group.employees">
             <div fxLayout="row">
-              <div class="main-text cell-item selectable" fxLayout="column" fxFlex="1 1 80%"> <!--(click)="onClick(alloc, row['employee'])-->
+              <div class="main-text cell-item" fxLayout="column" fxFlex="1 1 70%">
                 {{employee.displayName}}
               </div>
-              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%"> <!--(click)="onClick(alloc, row['employee'])-->
-                8
+              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%">
+                {{employee.capacity}}
+              </div>
+              <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%">
+                <button mat-icon-button (click)="editEmployee(group, employee)">
+                  <mat-icon>edit</mat-icon>
+                </button>
               </div>
               <div class="main-text text-center cell-item" fxLayout="column" fxFlex="1 1 10%">
                 <button mat-icon-button (click)="removeEmployee(group, employee)">

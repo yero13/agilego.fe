@@ -13,8 +13,10 @@ import { TeamService } from '@service/team.service';
 export class EmployeeEditComponent implements OnInit {
   employeeForm: FormGroup;
   group: Group;
-  employee: FormControl;
-  capacity: FormControl;
+  employee: Employee;
+  is_new_employee: boolean;
+  employeeName: FormControl;
+  employeeCapacity: FormControl;
   employees: Employee[];
 
   constructor(public dialogRef: MatDialogRef<EmployeeEditComponent>,
@@ -25,15 +27,21 @@ export class EmployeeEditComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.data['group'];
+    if (this.data['employee']) {
+      this.employee = this.data['employee'];
+      this.is_new_employee = false;
+    } else {
+      this.employee = new Employee();
+      this.is_new_employee = true;
+    }
     this.resourceService.getEmployees().subscribe(employees => {
-      this.employees = employees; this.filterEmployees(); });
-    this.employee = new FormControl('', [Validators.required]);
-    this.capacity = new FormControl('', [Validators.required,
-      Validators.maxLength(2),
-      Validators.pattern('^\\d{1,2}$')]);
+      this.employees = employees; if (this.is_new_employee) {this.filterEmployees();}});
+    this.employeeCapacity = new FormControl('' ? this.is_new_employee : this.employee.capacity,
+      [Validators.required, Validators.maxLength(2), Validators.pattern('^\\d{1,2}$')]);
+    this.employeeName = new FormControl({value: this.employee.name, disabled: !this.is_new_employee}, Validators.required);
     this.employeeForm = new FormGroup({
-      'employee': this.employee,
-      'capacity': this.capacity
+      'employeeCapacity': this.employeeCapacity,
+      'employeeName': this.employeeName
     });
   }
 
@@ -46,7 +54,27 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   onUpdate(form) {
-    // this.dialogRef.close();
+    if (this.is_new_employee) {
+      for (let employee of this.employees) {
+        if (employee.name === this.employeeForm.value.employeeName) {
+          employee.capacity = this.employeeForm.value.employeeCapacity;
+          this.group.employees.push(employee);
+          break;
+        }
+      }
+    } else {
+      for (let employee of this.group.employees) {
+        if (employee.name === this.employee.name) {
+          employee.capacity = this.employeeForm.value.employeeCapacity;
+          break;
+        }
+      }
+    }
+    this.teamService.updateGroup(this.group, this.group.group).subscribe(
+      data => {},
+      error => console.error(`Error: ${error}`),
+      () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {})));
+    this.dialogRef.close();
   }
 
 }

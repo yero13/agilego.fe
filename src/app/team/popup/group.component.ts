@@ -63,27 +63,17 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onCompleted(): void {
-    this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
-  }
-
-  onDelete() {
-    this.teamService.removeGroup(this.group).subscribe(
-      data => {},
-      error => console.error(`Error: ${error}`),
-      () => this.onCompleted()
-    );
-    this.dialogRef.close();
-  }
-
   onUpdate(form) {
     if (this.is_new_group) {
       this.group.group = form.value.group_name.trim();
+      this.group.components = new Array();
+      this.group.employees = new Array();
+      this.group.capacity = 0;
       this.teamService.insertGroup(this.group).subscribe(
         data => {
         },
         error => console.error(`Error: ${error}`),
-        () => this.onCompleted());
+        () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {})));
     } else {
       const group_name = this.group.group;
       this.group.group = form.value.group_name.trim();
@@ -91,7 +81,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
         data => {
         },
         error => console.error(`Error: ${error}`),
-        () => this.onCompleted());
+        () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {})));
     }
     this.dialogRef.close();
   }

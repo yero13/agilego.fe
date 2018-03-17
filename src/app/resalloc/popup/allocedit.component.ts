@@ -64,15 +64,11 @@ export class AllocEditComponent implements OnInit, OnDestroy {
       error => console.error(`Error: ${error}`));
   }
 
-  onCompleted(): void {
-    this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}));
-  }
-
   onDelete() {
     this.allocService.removeAllocation(this.allocation).subscribe(
       data => {},
       error => console.error(`Error: ${error}`),
-      () => this.onCompleted()
+      () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}))
       );
     this.dialogRef.close();
   }
@@ -83,7 +79,8 @@ export class AllocEditComponent implements OnInit, OnDestroy {
     this.allocService.upsertAllocation(this.allocation).subscribe(
         data => {},
         error => console.error(`Error: ${error}`),
-        () => this.onCompleted());
+        () => this.messageService.sendMessage(new Message(MSG_ACTION_REFRESH, {}))
+    );
     this.dialogRef.close();
   }
 }
