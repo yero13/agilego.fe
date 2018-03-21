@@ -8,10 +8,10 @@ const SERVICE_SPRINT_TIMELINE = SERVICE_SPRINT + '/timeline';
 
 export class SprintService extends RestClient {
   public getSprint(): Observable<Sprint> {
-    return this.http.get<Sprint>(this.getUrl(SERVICE_SPRINT));
+    return this.http.get<Sprint>(RestClient.getApiUrl(SERVICE_SPRINT));
   }
 
   public getSprintTimeline(): Observable<Date[]> {
-    return this.http.get<Date[]>(this.getUrl(SERVICE_SPRINT_TIMELINE));
+    return this.http.get<Date[]>(RestClient.getApiUrl(SERVICE_SPRINT_TIMELINE));
   }
 }

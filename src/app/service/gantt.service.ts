@@ -7,10 +7,10 @@ const SERVICE_GANTT_LINKS = '/gantt/links';
 
 export class GanttService extends RestClient {
   public getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.getUrl(SERVICE_GANTT_TASKS));
+    return this.http.get<Task[]>(RestClient.getApiUrl(SERVICE_GANTT_TASKS));
   }
 
   public getLinks(): Observable<Link[]> {
-    return this.http.get<Link[]>(this.getUrl(SERVICE_GANTT_LINKS));
+    return this.http.get<Link[]>(RestClient.getApiUrl(SERVICE_GANTT_LINKS));
   }
 }

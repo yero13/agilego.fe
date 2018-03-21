@@ -7,10 +7,10 @@ const SERVICE_EMPLOYEES = '/employees';
 
 export class ResourceService extends RestClient {
   public getComponents(): Observable<string[]> {
-    return this.http.get<string[]>(this.getUrl(SERVICE_COMPONENTS));
+    return this.http.get<string[]>(RestClient.getApiUrl(SERVICE_COMPONENTS));
   }
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.getUrl(SERVICE_EMPLOYEES));
+    return this.http.get<Employee[]>(RestClient.getApiUrl(SERVICE_EMPLOYEES));
   }
 }

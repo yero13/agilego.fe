@@ -12,23 +12,23 @@ const SERVICE_ALLOCATION_VALIDATE = SERVICE_ALLOCATION + '/validate';
 
 export class AllocService extends RestClient {
   public getAllocations(): Observable<Allocation[]> {
-    return this.http.get<Allocation[]>(this.getUrl(SERVICE_ALLOCATIONS));
+    return this.http.get<Allocation[]>(RestClient.getApiUrl(SERVICE_ALLOCATIONS));
   }
 
   getAllocation(key: string, date: Date, group: string, employee: string): Observable<Allocation> {
-    return this.http.get<Allocation>(this.getUrl(sprintf(SERVICE_ALLOCATION_GET, key, date, group, employee)));
+    return this.http.get<Allocation>(RestClient.getApiUrl(sprintf(SERVICE_ALLOCATION_GET, key, date, group, employee)));
   }
 
   validateAllocation(alloc: Allocation): Observable<ValidationResult[]> {
-    return this.http.post<ValidationResult[]>(this.getUrl(SERVICE_ALLOCATION_VALIDATE), alloc);
+    return this.http.post<ValidationResult[]>(RestClient.getApiUrl(SERVICE_ALLOCATION_VALIDATE), alloc);
   }
 
   removeAllocation(alloc: Allocation): Observable<number> {
-    return this.http.delete<number>(this.getUrl(sprintf(SERVICE_ALLOCATION_REMOVE,
+    return this.http.delete<number>(RestClient.getApiUrl(sprintf(SERVICE_ALLOCATION_REMOVE,
       alloc.key, alloc.date, alloc.group, alloc.employee)));
   }
 
   upsertAllocation(alloc: Allocation): Observable<number> {
-    return this.http.post<number>(this.getUrl(SERVICE_ALLOCATION), alloc);
+    return this.http.post<number>(RestClient.getApiUrl(SERVICE_ALLOCATION), alloc);
   }
 }
