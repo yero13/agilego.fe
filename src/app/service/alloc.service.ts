@@ -4,8 +4,8 @@ import { RestClient } from '@service/rest.client';
 import { sprintf } from 'sprintf-js';
 import { ValidationResult } from '@app/model/validation';
 
-const SERVICE_ALLOCATIONS = '/assignments';
-const SERVICE_ALLOCATION = '/assignment';
+const SERVICE_ALLOCATIONS = '/allocations';
+const SERVICE_ALLOCATION = '/allocation';
 const SERVICE_ALLOCATION_GET = SERVICE_ALLOCATION + '/%s,%s,%s,%s';
 const SERVICE_ALLOCATION_REMOVE = SERVICE_ALLOCATION + '/%s,%s,%s,%s';
 const SERVICE_ALLOCATION_VALIDATE = SERVICE_ALLOCATION + '/validate';
