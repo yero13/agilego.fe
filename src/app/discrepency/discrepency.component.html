@@ -1,5 +1,5 @@
 <div>
-  <div class="header">Status date: {{statusDate}}</div>
+  <div class="header" *ngIf="statusDate">Status date: {{statusDate}}</div>
   <div>
     <mat-table [dataSource]="discrepencies">
       <ng-container matColumnDef="key">

@@ -16,7 +16,7 @@ export class DiscrepencyComponent implements OnInit {
   constructor(private statusService: StatusService, private resourceService: ResourceService) {}
 
   ngOnInit() {
-    this.statusService.getStatusDate().subscribe(date => this.statusDate = date.serverdate);
+    this.statusService.getStatusDate().subscribe(date => this.statusDate = date ? date.serverdate : null);
     this.statusService.getDiscrepencies().subscribe(discrepencies => this.discrepencies = discrepencies);
     this.resourceService.getEmployees().subscribe(employees => this.employees = employees);
   }
