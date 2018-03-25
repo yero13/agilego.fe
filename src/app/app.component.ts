@@ -14,6 +14,7 @@ export class AppComponent {
     this.routeLinks = [
       {label: 'Gantt', link: 'gantt'},
       {label: 'Resource allocation', link: 'resalloc'},
+      {label: 'Plan vs Actual', link: 'plan-vs-actual'},
       {label: 'Team', link: 'team'}
     ];
   }

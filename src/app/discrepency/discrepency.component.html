@@ -1,0 +1,58 @@
+<div>
+  <div class="header">Status date: {{statusDate}}</div>
+  <div>
+    <mat-table [dataSource]="discrepencies">
+      <ng-container matColumnDef="key">
+        <mat-header-cell *matHeaderCellDef fxFlex="7%">Key</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="7%">{{item.key}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sprint_diff">
+        <mat-header-cell *matHeaderCellDef fxFlex="7%">Scope changes</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="7%">{{scopeDiff(item.sprint_diff)}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="start_plan">
+        <mat-header-cell *matHeaderCellDef fxFlex="7%">Planned start</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="7%">{{item.start_plan}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="end_plan">
+        <mat-header-cell *matHeaderCellDef fxFlex="7%">Planned start</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="7%">{{item.end_plan}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef fxFlex="8%">Actual status</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="8%">{{item.status}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="assignee_plan">
+        <mat-header-cell *matHeaderCellDef fxFlex="10%">Planned assignee(s)</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="10%">
+          <div *ngFor="let assignee of item.assignees_plan">
+          {{assignee.group}}&nbsp;:&nbsp;{{getEmployeeDisplayName(assignee.employee)}}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="assignee_actual">
+        <mat-header-cell *matHeaderCellDef fxFlex="10%">Actual assignee</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="10%">{{item.assignee_id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="whrs_plan">
+        <mat-header-cell *matHeaderCellDef fxFlex="10%">Planned hours</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="10%"><span *ngIf="item.whrs_plan">{{item.whrs_plan}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="spent">
+        <mat-header-cell *matHeaderCellDef fxFlex="10%">Actual spent time</mat-header-cell>
+        <mat-cell *matCellDef="let item" class="main-text" fxFlex="10%"><span *ngIf="item.spent">{{item.spent.toFixed(2)}}</span></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['key', 'sprint_diff', 'start_plan', 'end_plan', 'status', 'assignee_plan', 'assignee_actual', 'whrs_plan', 'spent']"></mat-header-row>
+      <mat-row *matRowDef="let item; columns: ['key', 'sprint_diff', 'start_plan', 'end_plan', 'status', 'assignee_plan', 'assignee_actual', 'whrs_plan', 'spent']"></mat-row>
+    </mat-table>
+  </div>
+</div>

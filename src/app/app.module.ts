@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ResAllocModule } from '@app/resalloc/resalloc.module';
 import { GanttModule } from '@app/gantt/gantt.module';
 import { TeamModule } from '@app/team/team.module';
+import { DiscrepencyModule } from '@app/discrepency/discrepency.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, MatTabsModule, ResAllocModule, TeamModule, GanttModule
+    BrowserModule, HttpClientModule, AppRoutingModule, MatTabsModule, ResAllocModule, TeamModule, GanttModule,
+    DiscrepencyModule
   ],
   providers: [ ],
   bootstrap: [ AppComponent ]
