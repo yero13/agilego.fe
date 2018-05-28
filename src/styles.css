@@ -46,4 +46,7 @@
   align-items: center;
   justify-content: space-around;
 }
-
+.backlog {
+  height: 250px;
+  overflow-y: scroll;
+}

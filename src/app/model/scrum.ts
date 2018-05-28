@@ -26,7 +26,7 @@ export class BacklogItem {
   components: string[];
   blocked_by: string[];
   blocks: string[];
-  related: string[];
+  relates: string[];
 }
 
 export class Subtask {
@@ -41,6 +41,6 @@ export class Subtask {
   components: string[];
   blocked_by: string[];
   blocks: string[];
-  related: string[];
+  relates: string[];
 }
 

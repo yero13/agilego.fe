@@ -1,5 +1,5 @@
 <div fxFlex="50%" fxLayout="column">
-  <mat-table [dataSource]="subtasks" [dragula]='"bag-work"' [attr.id]='"subtasks"'>
+  <mat-table [dataSource]="subtasks" [dragula]='"bag-work"' [attr.id]='"subtasks"' class="backlog">
     <ng-container matColumnDef="key">
       <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
       <mat-cell *matCellDef="let subtask" class="main-text">{{subtask.key}}</mat-cell>
@@ -35,6 +35,6 @@
     <div>components: {{selectedSubtask.components}}</div>
     <div>blocked by: {{selectedSubtask.blocked_by}}</div>
     <div>blocks: {{selectedSubtask.blocks}}</div>
-    <div>related: {{selectedSubtask.related}}</div>
+    <div>relates: {{selectedSubtask.relates}}</div>
   </div>
 </div>
