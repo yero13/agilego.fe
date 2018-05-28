@@ -50,3 +50,8 @@
   height: 250px;
   overflow-y: scroll;
 }
+.backlog-header {
+  position: sticky;
+  top: 0;
+  background: white;
+}

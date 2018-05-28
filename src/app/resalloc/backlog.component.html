@@ -15,7 +15,7 @@
       <mat-cell *matCellDef="let item" class="main-text">{{item.priority}}</mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['key', 'type', 'priority']"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="['key', 'type', 'priority']" class="backlog-header"></mat-header-row>
     <mat-row *matRowDef="let item; columns: ['key', 'type', 'priority']" [ngClass]="{'selected-item': selectedItem == item}" class="selectable" (click)="selectBacklogItem(item.key)" [attr.key]="item.key"></mat-row>
   </mat-table>
 </div>
