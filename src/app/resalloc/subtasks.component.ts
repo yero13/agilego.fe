@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { Subtask } from '@app/model/scrum';
-import { BacklogService} from '@service/backlog.service';
 import { MSG_ACTION_SELECT_BACKLOG_ITEM, Message, MessageService} from '@service/message.service';
 
 @Component({
@@ -14,18 +13,11 @@ export class SubtasksComponent implements OnDestroy {
   selectedSubtask: Subtask;
   subscription: Subscription;
 
-  constructor(private backlogService: BacklogService,
-              private messageService: MessageService) {
+  constructor(private messageService: MessageService) {
     this.subscription = this.messageService.getMessage()
       .filter(message => (message.action === MSG_ACTION_SELECT_BACKLOG_ITEM))
-      .subscribe(message => { this.getSubtasks(message.params.key) });
+      .subscribe(message => { this.subtasks = message.params.subtasks; });
 
-  }
-
-  getSubtasks(key: string): void {
-    this.backlogService.getSubtasks(key).subscribe(
-      data => this.subtasks = data,
-      error => console.error(`Error: ${error}`));
   }
 
   ngOnDestroy(): void {
@@ -34,6 +26,5 @@ export class SubtasksComponent implements OnDestroy {
 
   selectSubtask(key: string): void {
     this.selectedSubtask = this.subtasks.find(item => item.key === key);
-    //this.messageService.sendMessage(new Message(MSG_ACTION_SELECT_SUBTASK, this.selectedSubtask));
   }
 }

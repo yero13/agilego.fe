@@ -24,9 +24,10 @@ export class BacklogItem {
   duedate: Date;
   estimate: number;
   components: string[];
-  blocked_by: string[];
-  blocks: string[];
-  relates: string[];
+  blocked_by: string[]; // ToDo:
+  blocks: string[]; // ToDo:
+  relates: string[]; // ToDo:
+  subtasks: Subtask[];
 }
 
 export class Subtask {
@@ -39,8 +40,8 @@ export class Subtask {
   duedate: Date;
   estimate: number;
   components: string[];
-  blocked_by: string[];
-  blocks: string[];
-  relates: string[];
+  blocked_by: string[]; // ToDo:
+  blocks: string[]; // ToDo:
+  relates: string[]; // ToDo:
 }
 
